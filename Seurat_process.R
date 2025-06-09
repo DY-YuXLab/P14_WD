@@ -157,6 +157,7 @@ saveRDS(WD.combined, file = "WD.combined.glutamatergic.stim.rds")
 library(Augur)
 
 WD.combined <- readRDS("WD.combined.stim.rds")
+#WD.combined <- readRDS("WD.combined.glutamatergic.stim.rds")
 
 meta_data <- WD.combined@meta.data
 
