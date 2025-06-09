@@ -5,7 +5,7 @@ library(patchwork)
 library(future)
 library(harmony)
 
-count <- Read10X(data.dir = "F:/Single cell RNA seq/AGG_outs/AGGP14_WD_S1_2Batch/outs/count/filtered_feature_bc_matrix")
+count <- Read10X(data.dir = ".../AGG_outs/outs/count/filtered_feature_bc_matrix")
 cells <- colnames(count)
 
 #4_batch
@@ -109,6 +109,9 @@ saveRDS(WD.combined, file = "WD.combined.celltype.rds")
 WD.combined$celltype.stim <- paste(Idents(WD.combined), WD.combined$stim, sep = "_")
 WD.combined$celltype <- Idents(WD.combined)
 Idents(WD.combined) <- "celltype.stim"
+
+#Find differentially expressed genes
+FindMarkers(WD.combined, ident.1 = "L2/3_WD", ident.2 = "L2/3_Ctrl",  test.use = "wilcox_limma", min.pct = 0.5, logfc.threshold = 0, verbose = TRUE)
 
 saveRDS(WD.combined, file = "WD.combined.stim.rds")
 
